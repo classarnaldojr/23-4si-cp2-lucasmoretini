@@ -22,7 +22,7 @@ MATCHVALUEROCK  = 0.0098
 PLAYERLEFT = "Jogador 1"
 PLAYERRIGHT = "Jogador 2"
 
-scoreboard = [0, 0] # PLAYER 1, PLAYER 2
+scoreboard = [0, 0]
 color = [0, 100, 255]
 
 lastMovePlayLeft = ""
