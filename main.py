@@ -39,26 +39,26 @@ def movePlayer(imgGray, imgRgb, templatePaper, templateScissor, templateRock):
     matchScissor = cv2.matchTemplate(imgGray, templateScissor, cv2.TM_SQDIFF_NORMED)
     matchRock = cv2.matchTemplate(imgGray, templateRock, cv2.TM_SQDIFF_NORMED)
 
-    minMatchValuePaper, _, positionMatchPapel, _ = cv2.minMaxLoc(matchPaper)
-    minMatchValueScissor, _, positionMatchTesoura, _ = cv2.minMaxLoc(matchScissor)
-    minMatchValueRock, _, positionMatchPedra, _ = cv2.minMaxLoc(matchRock)
+    minMatchValuePaper, _, positionMatchPaper, _ = cv2.minMaxLoc(matchPaper)
+    minMatchValueScissor, _, positionMatchScissor, _ = cv2.minMaxLoc(matchScissor)
+    minMatchValueRock, _, positionMatchRock, _ = cv2.minMaxLoc(matchRock)
 
     _, heigthTemplatePapel = templatePaper.shape[::-1]
     _, heigthTemplateTesoura = templateScissor.shape[::-1]
     _, heigthTemplatePedra = templateRock.shape[::-1]
     
     if minMatchValuePaper <MATCHVALUEPAPER:
-        drawPosition = (positionMatchPapel[0] , positionMatchPapel[1] + heigthTemplatePapel + 30)
+        drawPosition = (positionMatchPaper[0] , positionMatchPaper[1] + heigthTemplatePapel + 30)
         drawInScreen(imgRgb, PAPER, drawPosition, color)
-        return [PAPER, positionMatchPapel]
+        return [PAPER, positionMatchPaper]
     elif minMatchValueScissor < MATCHVALUESCISSOR:
-        drawPosition = (positionMatchTesoura[0] , positionMatchTesoura[1] + heigthTemplateTesoura + 30)
+        drawPosition = (positionMatchScissor[0] , positionMatchScissor[1] + heigthTemplateTesoura + 30)
         drawInScreen(imgRgb, SCISSOR, drawPosition, color)
-        return [SCISSOR, positionMatchTesoura]
+        return [SCISSOR, positionMatchScissor]
     elif minMatchValueRock < MATCHVALUEROCK: 
-        drawPosition = (positionMatchPedra[0] , positionMatchPedra[1] + heigthTemplatePedra + 30)
+        drawPosition = (positionMatchRock[0] , positionMatchRock[1] + heigthTemplatePedra + 30)
         drawInScreen(imgRgb, ROCK, drawPosition, color)
-        return [ROCK, positionMatchPedra]
+        return [ROCK, positionMatchRock]
     else:
         return [MOVENOTIDENTIFY, [0, 0]]
     
